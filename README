@@ -1,0 +1,20 @@
+# Convert to one file
+
+# Requirements
+POSIX Shell & Utilities
+Git
+Docker
+
+# Download
+git clone https://github.com/pbizopoulos/convert-to-one-file $HOME/github.com/pbizopoulos/convert-to-one-file
+cd $HOME/github.com/pbizopoulos/convert-to-one-file/
+
+# Development
+cd python/ && make clean check all && cd ..
+
+# Installation
+pip install https://github.com/pbizopoulos/convert-to-one-file/tarball/main#subdirectory=python
+
+# Usage
+convert_to_one_file README
+
