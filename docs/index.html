@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <title>Convert python project to one file</title>
+        <link href="data:," rel="icon">
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.2.1/core.css">
+        <script type="module" src="https://pyscript.net/releases/2024.2.1/core.js"></script>
+    </head>
+
+    <body>
+        <nav>
+            <a href="https://github.com/pbizopoulos/convert-python-project-to-one-file">Source code</a> | <a href="https://pbizopoulos.github.io">Home page</a> / <b>Convert python project to one file</b>
+        </nav>
+        <div>
+            <input type="file" id="file-input">
+            <label for="choose-main-file-select">Choose main file:</label>
+            <select id="choose-main-file-select" name="choose-main-file-select">
+            </select>
+            <button type="button" id="convert-button">Convert</button>
+        </div>
+        <script type="py" src="./prm/main.py" config="./prm/pyscript.toml"></script>
+    </body>
+
+</html>

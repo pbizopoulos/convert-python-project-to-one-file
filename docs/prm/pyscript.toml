@@ -1,0 +1,6 @@
+packages = [
+  "isort"
+]
+
+[[fetch]]
+from = "https://raw.githubusercontent.com/pbizopoulos/convert-python-project-to-one-file/main/python/main.py"

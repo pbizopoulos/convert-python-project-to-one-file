@@ -1,0 +1,26 @@
+# Convert python project to one file
+https://pbizopoulos.github.io/convert-python-project-to-one-file
+
+# Requirements
+POSIX Shell & Utilities
+Git
+Docker
+
+# Download
+git clone https://github.com/pbizopoulos/convert-python-project-to-one-file $HOME/github.com/pbizopoulos/convert-python-project-to-one-file
+cd $HOME/github.com/pbizopoulos/convert-python-project-to-one-file/
+
+# Development
+cd docs/ && make clean check all && cd ..
+cd python/ && make clean check all && cd ..
+
+# Staging
+cd docs/ && make STAGING=1
+
+# Installation
+pip install https://api.github.com/repos/pbizopoulos/convert-python-project-to-one-file/tarball/main#subdirectory=python
+
+# Usage
+convert_python_project_to_one_file dir/
+convert_python_project_to_one_file file
+
