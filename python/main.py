@@ -7,6 +7,7 @@ from shutil import copy, copyfile
 from typing import Any
 
 import isort
+import ssort
 
 
 class Transformer(ast.NodeTransformer):
@@ -117,6 +118,11 @@ def convert_python_project_to_one_file(input_file_name: str) -> int:  # noqa: C9
                     with output_file_name.open(mode="w") as file:
                         file.writelines(lines)
                     break
+    with output_file_name.open(mode="r") as file:
+        code = file.read()
+    code = ssort.ssort(code)
+    with output_file_name.open(mode="w") as file:
+        file.write(code)
     return 0
 
 
