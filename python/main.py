@@ -56,7 +56,7 @@ class IndividualizeImportNames(ast.NodeTransformer):
         return node
 
 
-def convert_python_project_to_one_file(input_file_name: str) -> int:  # noqa: C901
+def convert_python_project_to_one_file(input_file_name: str) -> int:  # noqa: C901,PLR0915
     base_path = Path(input_file_name).resolve().parent
     if (base_path / "__init__.py").is_file():
         base_path = base_path.parent
@@ -72,6 +72,11 @@ def convert_python_project_to_one_file(input_file_name: str) -> int:  # noqa: C9
         for node in ast.walk(tree):
             if isinstance(node, ast.Attribute) and hasattr(node.value, "id"):
                 attr_usage.setdefault(node.value.id, set()).add(node.attr)
+        imports = []
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imports.append(node.names[0].name)  # noqa: PERF401
+        attr_usage = {key: attr_usage[key] for key in imports if key in attr_usage}
         IndividualizeImportNames(attr_usage).visit(tree)
         code_unparsed = ast.unparse(tree)
         with output_file_name.open("w") as file:
