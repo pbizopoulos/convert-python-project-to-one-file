@@ -1,5 +1,6 @@
 packages = [
-  "isort"
+  "isort",
+  "ssort"
 ]
 
 [[fetch]]
