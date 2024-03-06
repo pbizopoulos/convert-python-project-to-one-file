@@ -2,9 +2,11 @@ from os import getcwd
 
 def foo_2(input_):
     return str(input_ + 1)
+pass
 
 def foo_1(input_):
     return input_ + 1
+pass
 
 class Class:
     field = 'this'

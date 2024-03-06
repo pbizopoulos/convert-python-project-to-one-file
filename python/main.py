@@ -10,24 +10,6 @@ import isort
 import ssort
 
 
-class Transformer(ast.NodeTransformer):
-    def visit(self: Transformer, node: Any) -> Any:  # noqa: ANN401
-        self.generic_visit(node)
-        if isinstance(node, ast.Expr):
-            if isinstance(node.value, ast.Constant):
-                return None
-            if isinstance(node.value, ast.Call):  # noqa: SIM102
-                if hasattr(node.value.func, "id") and node.value.func.id == "print":
-                    return None
-        if isinstance(node, ast.FunctionDef):
-            node.returns = None
-            if node.args.args:
-                for arg in node.args.args:
-                    arg.annotation = None
-            return node
-        return node
-
-
 class IndividualizeImportNames(ast.NodeTransformer):
     def __init__(
         self: IndividualizeImportNames,
@@ -85,8 +67,7 @@ def convert_python_project_to_one_file(input_file_name: str) -> int:  # noqa: C9
         isort.file(output_file_name, float_to_top=True, quiet=True)
         with output_file_name.open() as file:
             tree = ast.parse(file.read())
-        transformer = Transformer()
-        ast.fix_missing_locations(transformer.visit(tree))
+        ast.fix_missing_locations(tree)
         code_unparsed = ast.unparse(tree)
         with output_file_name.open("w") as file:
             file.write(code_unparsed)
@@ -104,7 +85,10 @@ def convert_python_project_to_one_file(input_file_name: str) -> int:  # noqa: C9
                         lines = file.readlines()
                     with output_file_name.open(mode="w") as file:
                         for i, line in enumerate(lines, 1):
-                            if i != node.lineno:
+                            if i == node.lineno:
+                                leading_spaces = len(line) - len(line.lstrip())
+                                file.write(leading_spaces * " " + "pass\n")
+                            else:
                                 file.write(line)
                     if node_module in node_modules:
                         break
