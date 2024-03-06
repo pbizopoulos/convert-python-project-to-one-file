@@ -1,6 +1,10 @@
 from library_1 import foo_1
 import library_2
 import os
+from os import (
+        getenv,
+        environ,
+        )
 
 class Class():
     field = "this"
