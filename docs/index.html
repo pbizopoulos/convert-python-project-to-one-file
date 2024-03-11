@@ -7,10 +7,17 @@
         <title>Convert python project to one file</title>
         <link href="data:," rel="icon">
         <link rel="stylesheet" href="https://pyscript.net/releases/2024.2.1/core.css">
+        <script type="module">
+            const loading = document.getElementById('loading');
+            addEventListener('py:ready', () => loading.close());
+            loading.showModal();
+
+        </script>
         <script type="module" src="https://pyscript.net/releases/2024.2.1/core.js"></script>
     </head>
 
     <body>
+        <dialog id="loading">Loading...</dialog>
         <nav>
             <a href="https://github.com/pbizopoulos/convert-python-project-to-one-file">Source code</a> | <a href="https://pbizopoulos.github.io">Home page</a> / <b>Convert python project to one file</b>
         </nav>
